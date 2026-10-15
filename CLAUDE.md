@@ -28,6 +28,7 @@ dev 서버는 `npx astro dev --background`로 띄우고 `astro dev stop` / `stat
 - `src/layouts/BaseLayout.astro` — 모든 페이지의 공통 레이아웃 (`lang="ko"`)
 - `src/styles/global.css` — 디자인 토큰(`:root` CSS 변수, 다크 모드 포함). 색상은 토큰으로만 쓴다
 - `.github/workflows/deploy.yml` — `withastro/action`으로 빌드 후 Pages 배포
+- `wiki/` — 글·프로젝트 작성용 LLM 위키 (로컬 전용, `.gitignore`에 등록되어 커밋되지 않음). 규칙은 `wiki/README.md`. 글이나 프로젝트를 쓰기 전에 `wiki/index.md`를 먼저 보고, 사용자가 새 자료나 사실을 주면 위키에도 반영한다
 
 ## 콘텐츠 작성 규칙
 
