@@ -1,20 +1,84 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import { type CollectionEntry, getEntry, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Tags from '../../components/Tags.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPosts } from '../../lib/content';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
+	const posts = await getPosts();
+	return posts.map((post) => ({ params: { slug: post.id }, props: post }));
 }
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags } = post.data;
+const project = post.data.project && (await getEntry(post.data.project));
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<BaseLayout title={title} description={description} image={heroImage} type="article">
+	<article>
+		<header>
+			<p class="date">
+				<FormattedDate date={pubDate} />
+				{
+					updatedDate && (
+						<span>
+							{' '}
+							· 수정 <FormattedDate date={updatedDate} />
+						</span>
+					)
+				}
+			</p>
+			<h1>{title}</h1>
+			<p class="desc">{description}</p>
+			<Tags items={tags} />
+			{
+				project && (
+					<p class="project">
+						관련 프로젝트: <a href={`/projects/${project.id}/`}>{project.data.title}</a>
+					</p>
+				)
+			}
+		</header>
+		{heroImage && <Image class="hero" src={heroImage} width={1200} alt="" />}
+		<div class="prose">
+			<Content />
+		</div>
+	</article>
+	<p class="back"><a href="/blog/">← 글 목록</a></p>
+</BaseLayout>
+
+<style>
+	header {
+		margin-bottom: 2rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--border);
+	}
+	.date {
+		margin-bottom: 0.3rem;
+		color: var(--text-muted);
+		font-size: 0.9rem;
+	}
+	h1 {
+		margin-bottom: 0.5rem;
+	}
+	.desc {
+		color: var(--text-muted);
+		font-size: 1.05rem;
+	}
+	.project {
+		margin: 1rem 0 0;
+		font-size: 0.92rem;
+	}
+	.hero {
+		width: 100%;
+		margin-bottom: 2rem;
+	}
+	.back {
+		margin-top: 3rem;
+		font-size: 0.92rem;
+	}
+</style>

@@ -1,0 +1,30 @@
+import { getCollection } from 'astro:content';
+
+// draft 글은 개발 서버에서만 보이고 프로덕션 빌드에서는 빠진다
+const isVisible = ({ data }: { data: { draft: boolean } }) => !import.meta.env.PROD || !data.draft;
+
+export async function getPosts() {
+	return (await getCollection('blog', isVisible)).sort(
+		(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	);
+}
+
+// 진행 중인 프로젝트가 먼저, 그다음 종료일이 최근인 순
+export async function getProjects() {
+	const end = (d?: Date) => d?.valueOf() ?? Infinity;
+	return (await getCollection('projects', isVisible)).sort(
+		(a, b) =>
+			end(b.data.endDate) - end(a.data.endDate) ||
+			b.data.startDate.valueOf() - a.data.startDate.valueOf(),
+	);
+}
+
+/** 'YYYY-MM' 또는 Date를 '2024.03' 형식으로 */
+export function formatMonth(value: string | Date) {
+	const d = typeof value === 'string' ? new Date(`${value}-01`) : value;
+	return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
+
+export function formatPeriod(start: string | Date, end?: string | Date) {
+	return `${formatMonth(start)} – ${end ? formatMonth(end) : '현재'}`;
+}

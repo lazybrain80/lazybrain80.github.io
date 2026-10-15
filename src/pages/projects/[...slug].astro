@@ -1,0 +1,117 @@
+---
+import { type CollectionEntry, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import PostList from '../../components/PostList.astro';
+import Tags from '../../components/Tags.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatPeriod, getPosts, getProjects } from '../../lib/content';
+
+export async function getStaticPaths() {
+	const projects = await getProjects();
+	return projects.map((project) => ({ params: { slug: project.id }, props: project }));
+}
+type Props = CollectionEntry<'projects'>;
+
+const project = Astro.props;
+const { title, description, kind, company, role, startDate, endDate, stack, links, heroImage } =
+	project.data;
+const { Content } = await render(project);
+const relatedPosts = (await getPosts()).filter((post) => post.data.project?.id === project.id);
+---
+
+<BaseLayout title={title} description={description} image={heroImage} type="article">
+	<article>
+		<header>
+			<p class="eyebrow">{kind === 'work' ? company ?? '경력 프로젝트' : '사이드 프로젝트'}</p>
+			<h1>{title}</h1>
+			<p class="desc">{description}</p>
+			<dl class="facts">
+				<dt>기간</dt>
+				<dd>{formatPeriod(startDate, endDate)}</dd>
+				<dt>역할</dt>
+				<dd>{role}</dd>
+				{
+					stack.length > 0 && (
+						<>
+							<dt>기술</dt>
+							<dd>
+								<Tags items={stack} />
+							</dd>
+						</>
+					)
+				}
+				{
+					(links.repo || links.demo) && (
+						<>
+							<dt>링크</dt>
+							<dd class="links">
+								{links.repo && <a href={links.repo} target="_blank" rel="noopener">Repository</a>}
+								{links.demo && <a href={links.demo} target="_blank" rel="noopener">Demo</a>}
+							</dd>
+						</>
+					)
+				}
+			</dl>
+		</header>
+		{heroImage && <Image class="hero" src={heroImage} width={1200} alt="" />}
+		<div class="prose">
+			<Content />
+		</div>
+	</article>
+
+	{
+		relatedPosts.length > 0 && (
+			<section>
+				<h2 class="section-title">관련 글</h2>
+				<PostList posts={relatedPosts} />
+			</section>
+		)
+	}
+	<p class="back"><a href="/projects/">← 프로젝트 목록</a></p>
+</BaseLayout>
+
+<style>
+	header {
+		margin-bottom: 2rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--border);
+	}
+	.eyebrow {
+		margin-bottom: 0.3rem;
+		color: var(--accent);
+		font-size: 0.9rem;
+		font-weight: 600;
+	}
+	h1 {
+		margin-bottom: 0.5rem;
+	}
+	.desc {
+		color: var(--text-muted);
+		font-size: 1.05rem;
+	}
+	.facts {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 0.5rem 1.5rem;
+		margin: 1.25rem 0 0;
+		font-size: 0.95rem;
+	}
+	.facts dt {
+		color: var(--text-muted);
+	}
+	.facts dd {
+		margin: 0;
+	}
+	.links {
+		display: flex;
+		gap: 1rem;
+	}
+	.hero {
+		width: 100%;
+		margin-bottom: 2rem;
+	}
+	.back {
+		margin-top: 3rem;
+		font-size: 0.92rem;
+	}
+</style>

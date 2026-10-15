@@ -1,0 +1,65 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatPeriod } from '../lib/content';
+import Tags from './Tags.astro';
+
+interface Props {
+	project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, description, kind, company, role, startDate, endDate, stack } = project.data;
+---
+
+<article>
+	<a href={`/projects/${project.id}/`}>
+		<div class="meta">
+			<span class="kind">{kind === 'work' ? company ?? '경력' : '사이드 프로젝트'}</span>
+			<span>{formatPeriod(startDate, endDate)}</span>
+		</div>
+		<h3>{title}</h3>
+		<p class="desc">{description}</p>
+		<p class="role">{role}</p>
+	</a>
+	<Tags items={stack} />
+</article>
+
+<style>
+	article {
+		padding: 1.25rem 1.4rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--bg);
+		transition: border-color 0.15s;
+	}
+	article:hover {
+		border-color: var(--accent);
+	}
+	a {
+		display: block;
+		color: inherit;
+		text-decoration: none;
+	}
+	.meta {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		color: var(--text-muted);
+		font-size: 0.85rem;
+	}
+	.kind {
+		font-weight: 600;
+	}
+	h3 {
+		margin: 0.3rem 0 0.4rem;
+		font-size: 1.15rem;
+	}
+	.desc {
+		margin-bottom: 0.4rem;
+	}
+	.role {
+		margin-bottom: 0.8rem;
+		color: var(--text-muted);
+		font-size: 0.9rem;
+	}
+</style>

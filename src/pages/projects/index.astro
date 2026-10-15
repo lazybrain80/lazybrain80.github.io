@@ -1,0 +1,37 @@
+---
+import ProjectCard from '../../components/ProjectCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjects } from '../../lib/content';
+
+const projects = await getProjects();
+const groups = [
+	{ title: '경력 프로젝트', items: projects.filter((p) => p.data.kind === 'work') },
+	{ title: '사이드 프로젝트', items: projects.filter((p) => p.data.kind === 'side') },
+].filter((g) => g.items.length > 0);
+---
+
+<BaseLayout title="Projects" description="경력 중 수행한 프로젝트와 사이드 프로젝트">
+	<h1>Projects</h1>
+	<p class="muted">업무로 수행한 프로젝트와 개인 사이드 프로젝트입니다. 각 항목에서 문제, 접근 방법, 결과를 볼 수 있습니다.</p>
+
+	{groups.length === 0 && <p class="empty">아직 등록된 프로젝트가 없습니다.</p>}
+	{
+		groups.map((group) => (
+			<section>
+				<h2 class="section-title">{group.title}</h2>
+				<div class="grid">
+					{group.items.map((project) => (
+						<ProjectCard project={project} />
+					))}
+				</div>
+			</section>
+		))
+	}
+</BaseLayout>
+
+<style>
+	.grid {
+		display: grid;
+		gap: 1rem;
+	}
+</style>

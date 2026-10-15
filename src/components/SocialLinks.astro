@@ -1,0 +1,40 @@
+---
+import { profile } from '../data/profile';
+
+const { github, email, linkedin } = profile.links;
+const links = [
+	github && { label: 'GitHub', href: github },
+	linkedin && { label: 'LinkedIn', href: linkedin },
+	email && { label: 'Email', href: `mailto:${email}` },
+	{ label: 'RSS', href: '/rss.xml' },
+].filter((link): link is { label: string; href: string } => Boolean(link));
+---
+
+<ul>
+	{
+		links.map(({ label, href }) => (
+			<li>
+				<a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener">
+					{label}
+				</a>
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	a {
+		color: var(--text-muted);
+	}
+	a:hover {
+		color: var(--accent);
+	}
+</style>
