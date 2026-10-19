@@ -36,7 +36,25 @@ dev 서버는 `npx astro dev --background`로 띄우고 `astro dev stop` / `stat
 - slug(파일명)는 영문 소문자 kebab-case. 이미지가 있으면 `<slug>/index.md` 폴더 형태로 두고 이미지를 같은 폴더에
 - 본문은 한국어, `##`부터 시작 (`#`은 레이아웃이 title로 렌더링), 코드 블록에는 언어 명시
 - `draft: true`면 dev 서버에서만 보이고 배포되지 않는다
-- 사용자가 주지 않은 경력·성과·수치를 지어내지 않는다. 모르는 부분은 `<!-- TODO: ... -->`로 남기고 사용자에게 묻는다
+- 사용자가 주지 않은 경력·성과·수치를 지어내지 않는다. 모르는 부분은 `<!-- TODO: ... -->`(MDX에서는 `{/* TODO: ... */}`)로 남기고 사용자에게 묻는다
+- 이미지·영상이 들어가는 글은 `<slug>/index.mdx`로 쓰고 미디어 파일을 같은 폴더에 둔다. MDX에서는 HTML 주석(`<!-- -->`)을 쓸 수 없다
+
+미디어 컴포넌트 (`src/components/`, MDX에서 import해서 쓴다):
+
+```mdx
+import Figure from '../../../components/Figure.astro';
+import Video from '../../../components/Video.astro';
+import MediaSlot from '../../../components/MediaSlot.astro';
+import tabletMain from './tablet-main.png';
+import demo from './exhibition-demo.mp4';
+
+<Figure src={tabletMain} alt="대체 텍스트" caption="캡션" />      {/* 세로 화면이면 narrow */}
+<Video src={demo} caption="캡션" />                              {/* 짧은 무음 반복은 clip, 세로는 portrait */}
+<Video youtube="VIDEO_ID" caption="캡션" />                      {/* 긴 영상은 YouTube */}
+<MediaSlot kind="video" note="여기 들어갈 장면 설명" />           {/* 파일이 아직 없을 때. dev에서만 보임 */}
+```
+
+영상 파일은 저장소에 커밋되므로 짧게 잘라 압축한다(한 파일 10MB 이하 권장). 그보다 길면 YouTube에 올려 `youtube`로 넣는다. 관람객 얼굴이 나오는 사진·영상은 공개해도 되는지 먼저 확인한다
 
 프로젝트 (`src/content/projects/<slug>.md`):
 

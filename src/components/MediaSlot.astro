@@ -1,0 +1,38 @@
+---
+// 아직 파일이 없는 이미지·영상 자리. dev 서버에서만 점선 상자로 보이고, 빌드 결과에는 아무것도 남기지 않는다.
+//   <MediaSlot kind="video" note="전시 현장: 관람객이 태블릿을 들고 스팟을 따라가는 장면 (10~20초)" />
+interface Props {
+	kind?: 'image' | 'video';
+	note: string;
+}
+
+const { kind = 'image', note } = Astro.props;
+const show = import.meta.env.DEV;
+---
+
+{
+	show && (
+		<div class="slot">
+			<strong>{kind === 'video' ? '🎬 영상 자리' : '🖼 이미지 자리'}</strong>
+			<span>{note}</span>
+		</div>
+	)
+}
+
+<style>
+	.slot {
+		display: grid;
+		gap: 0.3rem;
+		margin: 2rem 0;
+		padding: 1.5rem;
+		border: 1px dashed var(--accent);
+		border-radius: var(--radius);
+		background: var(--accent-soft);
+		color: var(--text-muted);
+		font-size: 0.9rem;
+		text-align: center;
+	}
+	strong {
+		color: var(--accent);
+	}
+</style>
