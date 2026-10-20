@@ -1,10 +1,11 @@
 ---
 import { type CollectionEntry, render } from 'astro:content';
 import { Image } from 'astro:assets';
+import SeriesNav from '../../components/SeriesNav.astro';
 import PostList from '../../components/PostList.astro';
 import Tags from '../../components/Tags.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { formatPeriod, getPosts, getProjects } from '../../lib/content';
+import { formatPeriod, getProjectPosts, getProjects } from '../../lib/content';
 
 export async function getStaticPaths() {
 	const projects = await getProjects();
@@ -16,14 +17,7 @@ const project = Astro.props;
 const { title, description, kind, company, role, startDate, endDate, stack, links, heroImage } =
 	project.data;
 const { Content } = await render(project);
-// 관련 글은 읽는 순서대로: 먼저 쓴 글이 위, 같은 날이면 제목 순('1편', '2편'…)
-const relatedPosts = (await getPosts())
-	.filter((post) => post.data.project?.id === project.id)
-	.sort(
-		(a, b) =>
-			a.data.pubDate.valueOf() - b.data.pubDate.valueOf() ||
-			a.data.title.localeCompare(b.data.title, 'ko', { numeric: true }),
-	);
+const relatedPosts = await getProjectPosts(project.id);
 ---
 
 <BaseLayout title={title} description={description} image={heroImage} type="article">
@@ -60,6 +54,7 @@ const relatedPosts = (await getPosts())
 				}
 			</dl>
 		</header>
+		<SeriesNav project={project} posts={relatedPosts} />
 		{heroImage && <Image class="hero" src={heroImage} width={1200} alt="" />}
 		<div class="prose">
 			<Content />

@@ -1,0 +1,141 @@
+---
+// 프로젝트 개요와 연결된 글 목록. 넓은 화면에서는 본문 왼쪽에 따라다니는 사이드바,
+// 좁은 화면에서는 제목 아래 접히는 목록으로 보인다. <article> 안, header 바로 뒤에 둔다.
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	project: CollectionEntry<'projects'>;
+	posts: CollectionEntry<'blog'>[];
+	// 지금 보고 있는 글의 id. 프로젝트 페이지면 생략
+	current?: string;
+}
+
+const { project, posts, current } = Astro.props;
+const prefix = `${project.data.title} `;
+// 사이드바 폭이 좁으니 제목 앞의 프로젝트 이름은 뗀다 ('The Traveling Soul 1편: …' → '1편: …')
+const shortTitle = (title: string) => (title.startsWith(prefix) ? title.slice(prefix.length) : title);
+const items = [
+	{ href: `/projects/${project.id}/`, label: '프로젝트 개요', active: !current },
+	...posts.map((post) => ({
+		href: `/blog/${post.id}/`,
+		label: shortTitle(post.data.title),
+		active: post.id === current,
+	})),
+];
+---
+
+{
+	posts.length > 0 && (
+		<>
+			<aside class="series-side" aria-label={`${project.data.title} 관련 글`}>
+				<nav>
+					<p class="heading">{project.data.title}</p>
+					<ol>
+						{items.map((item) => (
+							<li>
+								<a href={item.href} aria-current={item.active ? 'page' : undefined}>
+									{item.label}
+								</a>
+							</li>
+						))}
+					</ol>
+				</nav>
+			</aside>
+			<details class="series-inline">
+				<summary>
+					{project.data.title} 관련 글 <span class="count">{posts.length}편</span>
+				</summary>
+				<ol>
+					{items.map((item) => (
+						<li>
+							<a href={item.href} aria-current={item.active ? 'page' : undefined}>
+								{item.label}
+							</a>
+						</li>
+					))}
+				</ol>
+			</details>
+		</>
+	)
+}
+
+<style>
+	ol {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	a {
+		display: block;
+		color: var(--text-muted);
+		text-decoration: none;
+		line-height: 1.5;
+	}
+	a:hover {
+		color: var(--accent);
+	}
+	a[aria-current='page'] {
+		color: var(--accent);
+		font-weight: 600;
+	}
+
+	/* 넓은 화면: 본문 왼쪽 여백에 붙어 스크롤을 따라온다 */
+	.series-side {
+		display: none;
+	}
+	@media (min-width: 1280px) {
+		.series-side {
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: calc(100% + 2.5rem);
+			width: 200px;
+		}
+		.series-inline {
+			display: none;
+		}
+	}
+	.series-side nav {
+		position: sticky;
+		top: 2rem;
+		font-size: 0.88rem;
+	}
+	.series-side .heading {
+		margin-bottom: 0.6rem;
+		color: var(--text);
+		font-weight: 600;
+	}
+	.series-side li {
+		padding: 0.35rem 0 0.35rem 0.8rem;
+		border-left: 2px solid var(--border);
+	}
+	.series-side li:has([aria-current='page']) {
+		border-left-color: var(--accent);
+	}
+
+	/* 좁은 화면: 제목 아래 접히는 목록 */
+	.series-inline {
+		margin: -0.5rem 0 2rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--bg-subtle);
+		font-size: 0.92rem;
+	}
+	summary {
+		padding: 0.75rem 1rem;
+		font-weight: 600;
+		cursor: pointer;
+	}
+	.count {
+		color: var(--text-muted);
+		font-weight: 400;
+	}
+	.series-inline ol {
+		padding: 0 1rem 0.75rem;
+	}
+	.series-inline li {
+		padding: 0.4rem 0;
+		border-top: 1px solid var(--border);
+	}
+</style>

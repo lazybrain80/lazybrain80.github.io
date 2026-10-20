@@ -1,10 +1,11 @@
 ---
 import { type CollectionEntry, getEntry, render } from 'astro:content';
 import { Image } from 'astro:assets';
+import SeriesNav from '../../components/SeriesNav.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Tags from '../../components/Tags.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getPosts } from '../../lib/content';
+import { getPosts, getProjectPosts } from '../../lib/content';
 
 export async function getStaticPaths() {
 	const posts = await getPosts();
@@ -15,6 +16,7 @@ type Props = CollectionEntry<'blog'>;
 const post = Astro.props;
 const { title, description, pubDate, updatedDate, heroImage, tags } = post.data;
 const project = post.data.project && (await getEntry(post.data.project));
+const seriesPosts = project ? await getProjectPosts(project.id) : [];
 const { Content } = await render(post);
 ---
 
@@ -43,6 +45,7 @@ const { Content } = await render(post);
 				)
 			}
 		</header>
+		{project && <SeriesNav project={project} posts={seriesPosts} current={post.id} />}
 		{heroImage && <Image class="hero" src={heroImage} width={1200} alt="" />}
 		<div class="prose">
 			<Content />

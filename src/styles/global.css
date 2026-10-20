@@ -52,6 +52,11 @@ main {
 	padding: 3rem 1rem 4rem;
 }
 
+/* 연재 사이드바(SeriesNav)의 기준 위치 */
+article {
+	position: relative;
+}
+
 h1,
 h2,
 h3,
