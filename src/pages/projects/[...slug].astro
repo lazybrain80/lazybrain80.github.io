@@ -16,7 +16,14 @@ const project = Astro.props;
 const { title, description, kind, company, role, startDate, endDate, stack, links, heroImage } =
 	project.data;
 const { Content } = await render(project);
-const relatedPosts = (await getPosts()).filter((post) => post.data.project?.id === project.id);
+// 관련 글은 읽는 순서대로: 먼저 쓴 글이 위, 같은 날이면 제목 순('1편', '2편'…)
+const relatedPosts = (await getPosts())
+	.filter((post) => post.data.project?.id === project.id)
+	.sort(
+		(a, b) =>
+			a.data.pubDate.valueOf() - b.data.pubDate.valueOf() ||
+			a.data.title.localeCompare(b.data.title, 'ko', { numeric: true }),
+	);
 ---
 
 <BaseLayout title={title} description={description} image={heroImage} type="article">

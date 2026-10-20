@@ -3,9 +3,12 @@ import { getCollection } from 'astro:content';
 // draft 글은 개발 서버에서만 보이고 프로덕션 빌드에서는 빠진다
 const isVisible = ({ data }: { data: { draft: boolean } }) => !import.meta.env.PROD || !data.draft;
 
+// 최근 글이 먼저. 같은 날 발행한 연재 글('1편', '2편'…)은 제목 순
 export async function getPosts() {
 	return (await getCollection('blog', isVisible)).sort(
-		(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+		(a, b) =>
+			b.data.pubDate.valueOf() - a.data.pubDate.valueOf() ||
+			a.data.title.localeCompare(b.data.title, 'ko', { numeric: true }),
 	);
 }
 

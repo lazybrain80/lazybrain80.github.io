@@ -1,5 +1,5 @@
 ---
-title: '전시장에서 화면이 멈추지 않게'
+title: 'The Traveling Soul 3편: 전시장에서 화면이 멈추지 않게'
 description: '데이터 형식이 계속 바뀌고, 센서는 흔들리고, 아무도 새로고침해 주지 않는 전시장. 피지컬 AI 전시 화면을 버티게 만든 원칙들.'
 pubDate: 2026-10-20
 tags: ['zod', 'reliability', 'the-traveling-soul']
