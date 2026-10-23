@@ -4,9 +4,11 @@ import FormattedDate from './FormattedDate.astro';
 
 interface Props {
 	posts: CollectionEntry<'blog'>[];
+	// draft 글을 링크 없이 '준비 중'으로 보여 준다 (draft가 섞여 오는 연재 목록용)
+	pendingDrafts?: boolean;
 }
 
-const { posts } = Astro.props;
+const { posts, pendingDrafts = false } = Astro.props;
 ---
 
 {
@@ -14,15 +16,25 @@ const { posts } = Astro.props;
 		<p class="empty">아직 작성된 글이 없습니다.</p>
 	) : (
 		<ul>
-			{posts.map((post) => (
-				<li>
-					<a href={`/blog/${post.id}/`}>
-						<span class="title">{post.data.title}</span>
-						<span class="desc">{post.data.description}</span>
-					</a>
-					<FormattedDate date={post.data.pubDate} />
-				</li>
-			))}
+			{posts.map((post) =>
+				pendingDrafts && post.data.draft ? (
+					<li class="pending">
+						<div>
+							<span class="title">{post.data.title}</span>
+							<span class="desc">{post.data.description}</span>
+						</div>
+						<span class="badge">준비 중</span>
+					</li>
+				) : (
+					<li>
+						<a href={`/blog/${post.id}/`}>
+							<span class="title">{post.data.title}</span>
+							<span class="desc">{post.data.description}</span>
+						</a>
+						<FormattedDate date={post.data.pubDate} />
+					</li>
+				),
+			)}
 		</ul>
 	)
 }
@@ -41,7 +53,8 @@ const { posts } = Astro.props;
 		padding: 1rem 0;
 		border-bottom: 1px solid var(--border);
 	}
-	a {
+	a,
+	.pending div {
 		display: flex;
 		flex-direction: column;
 		color: inherit;
@@ -57,7 +70,11 @@ const { posts } = Astro.props;
 		color: var(--text-muted);
 		font-size: 0.92rem;
 	}
-	time {
+	.pending {
+		opacity: 0.7;
+	}
+	time,
+	.badge {
 		flex-shrink: 0;
 		color: var(--text-muted);
 		font-size: 0.85rem;

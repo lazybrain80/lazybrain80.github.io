@@ -65,7 +65,7 @@ const relatedPosts = await getProjectPosts(project.id);
 		relatedPosts.length > 0 && (
 			<section>
 				<h2 class="section-title">관련 글</h2>
-				<PostList posts={relatedPosts} />
+				<PostList posts={relatedPosts} pendingDrafts />
 			</section>
 		)
 	}

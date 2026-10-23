@@ -14,10 +14,11 @@ const { project, posts, current } = Astro.props;
 const prefix = `${project.data.title} `;
 // 사이드바 폭이 좁으니 제목 앞의 프로젝트 이름은 뗀다 ('The Traveling Soul 1편: …' → '1편: …')
 const shortTitle = (title: string) => (title.startsWith(prefix) ? title.slice(prefix.length) : title);
-const items = [
+// draft 글은 '준비 중'으로만 보이고 링크를 걸지 않는다 (배포되지 않아 404가 난다)
+const items: { href?: string; label: string; active: boolean }[] = [
 	{ href: `/projects/${project.id}/`, label: '프로젝트 개요', active: !current },
 	...posts.map((post) => ({
-		href: `/blog/${post.id}/`,
+		href: post.data.draft ? undefined : `/blog/${post.id}/`,
 		label: shortTitle(post.data.title),
 		active: post.id === current,
 	})),
@@ -33,9 +34,15 @@ const items = [
 					<ol>
 						{items.map((item) => (
 							<li>
-								<a href={item.href} aria-current={item.active ? 'page' : undefined}>
-									{item.label}
-								</a>
+								{item.href ? (
+									<a href={item.href} aria-current={item.active ? 'page' : undefined}>
+										{item.label}
+									</a>
+								) : (
+									<span class="pending" aria-current={item.active ? 'page' : undefined}>
+										{item.label} <span class="badge">준비 중</span>
+									</span>
+								)}
 							</li>
 						))}
 					</ol>
@@ -48,9 +55,15 @@ const items = [
 				<ol>
 					{items.map((item) => (
 						<li>
-							<a href={item.href} aria-current={item.active ? 'page' : undefined}>
-								{item.label}
-							</a>
+							{item.href ? (
+								<a href={item.href} aria-current={item.active ? 'page' : undefined}>
+									{item.label}
+								</a>
+							) : (
+								<span class="pending" aria-current={item.active ? 'page' : undefined}>
+									{item.label} <span class="badge">준비 중</span>
+								</span>
+							)}
 						</li>
 					))}
 				</ol>
@@ -74,9 +87,22 @@ const items = [
 	a:hover {
 		color: var(--accent);
 	}
-	a[aria-current='page'] {
+	a[aria-current='page'],
+	.pending[aria-current='page'] {
 		color: var(--accent);
 		font-weight: 600;
+	}
+	.pending {
+		display: block;
+		color: var(--text-muted);
+		line-height: 1.5;
+		opacity: 0.7;
+		cursor: default;
+	}
+	.badge {
+		font-size: 0.8em;
+		font-weight: 400;
+		white-space: nowrap;
 	}
 
 	/* 넓은 화면: 본문 왼쪽 여백에 붙어 스크롤을 따라온다 */
