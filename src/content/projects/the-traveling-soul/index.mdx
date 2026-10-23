@@ -10,12 +10,17 @@ stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'zustand', 'zod', 'MQT
 # links: { demo: 'https://...' }  # TODO: 공개 가능한 저장소·데모
 # heroImage: './cover.png'        # TODO: 직접 찍은 사진·스크린샷을 써도 되는지
 # featured: true                  # TODO: 홈 노출 여부
-draft: true
 ---
 
 import Figure from '../../../components/Figure.astro';
 import Video from '../../../components/Video.astro';
 import MediaSlot from '../../../components/MediaSlot.astro';
+import exhibitionDemo from './exhibition-demo.mp4';
+import exhibitionPoster from './exhibition-demo-poster.jpg';
+import tabletMain from './tablet-main.jpg';
+import tabletIntro from './tablet-intro.jpg';
+import dioramaScreen from './diorama-screen.jpg';
+import exhibitionBooth from './exhibition-booth.mp4';
 
 체험을 마친 사람에게 "AI가 몇 명이었던 것 같나요?"라고 묻고, "한 명"이라는 답을 듣는 것. 2026년 4월 킥오프에서 제가 적어 낸 성공 기준이었습니다.
 
@@ -23,12 +28,7 @@ The Traveling Soul은 AI의 기억과 맥락, 성격을 묶은 하나의 '영혼
 
 저는 외부 크리에이터로 참여해 관람객이 마주하는 전시 화면 전체를 맡았습니다. 손에 드는 태블릿부터 바깥 관람객을 위한 스탠바이미, 시나리오 속 집을 비추는 TV까지 화면 다섯 종을 Next.js 웹앱 하나로 만들었고, AI가 무언가를 알아챈 순간을 빛과 소리로 보여 주는 연출을 설계하고 구현했습니다.
 
-{/* 파일이 오면:
-import exhibitionDemo from './exhibition-demo.mp4';
-import exhibitionPoster from './exhibition-demo-poster.jpg';
-<Video src={exhibitionDemo} poster={exhibitionPoster} caption="데모데이 현장. 관람객이 태블릿을 들고 로봇과 함께 체험하는 모습" />
-(1분이 넘으면 YouTube에 올려 <Video youtube="VIDEO_ID" caption="..." />) */}
-<MediaSlot kind="video" note="대표 영상: 데모데이 현장에서 관람객이 갤럭시 탭을 들고 스팟·반려로봇과 함께 체험을 진행하는 장면. 태블릿 화면과 로봇이 한 화면에 같이 잡히면 좋음. 가로 16:9, 20~40초(10MB 이하로 압축, 더 길면 YouTube). 관람객 얼굴이 나오면 공개 가능 여부 확인" />
+<Video src={exhibitionDemo} poster={exhibitionPoster} portrait caption="데모데이 현장. 관람객이 태블릿을 들고 로봇과 함께 체험하는 모습" />
 
 ## 한눈에 보기
 
@@ -43,7 +43,7 @@ import exhibitionPoster from './exhibition-demo-poster.jpg';
 
 로봇이나 자율주행차처럼 몸을 가진 기계가 AI로 주변을 인식하고, 상황을 이해해 판단하고, 실제 공간에서 행동하는 것을 **피지컬 AI(Physical AI)**라고 부릅니다. 이 프로젝트의 특징은 AI 하나가 기기 여러 대의 몸을 차례로 빌려 쓴다는 데 있었습니다. 찾으려 한 것은 늘 곁에 있는 '동반자'였고, "오, 신기하다"에서 끝나지 않고 일상에서 정말 쓸모 있는 경험이었습니다.
 
-이 기획은 프로젝트가 시작될 때 운영 측이 제안한 것입니다. 제 몫은 그다음, 이 아이디어가 실제로 동작하려면 서비스를 어떻게 설계하고 화면에 어떻게 표현할지였습니다. 킥오프에서 그 접근을 "Soul Walk"라는 이름으로 피칭했고, 맨 위의 성공 기준도 그 자료에 적었습니다. 이 프로젝트에 지원한 계기와 피칭의 내용은 [4편 회고](/blog/traveling-soul-retrospective/)에 썼습니다.
+이 기획은 프로젝트가 시작될 때 운영 측이 제안한 것입니다. 제 몫은 그다음, 이 아이디어가 실제로 동작하려면 서비스를 어떻게 설계하고 화면에 어떻게 표현할지였습니다. 킥오프에서 그 접근을 "Soul Walk"라는 이름으로 피칭했고, 맨 위의 성공 기준도 그 자료에 적었습니다. 이 프로젝트에 지원한 계기와 피칭의 내용은 회고인 4편(준비 중)에서 다룹니다.
 
 개발은 크게 네 갈래로 나뉘었습니다.
 
@@ -60,10 +60,7 @@ AI가 사용자의 상황을 아무리 잘 이해해도, 사용자가 그 사실
 
 답은 처음 설계에 없었습니다. 8월 말부터 9월까지 준비된 로봇으로 시험 운영을 이어 가던 중, 참여자들에게서 화면이 바뀌어도 알아차리기 힘들고 무엇을 봐야 할지 모르겠다는 리뷰가 나왔습니다. 처음에는 카드마다 빛을 하나씩 붙였고, 9월 중순에 그 빛들을 "직전과 달라진 것만, 잠깐" 빛나게 하는 공용 규칙으로 모았습니다. 색 하나에는 뜻 하나만 싣고, 소리는 빛과 같은 판정에서 울리게 했습니다.
 
-{/* 파일이 오면:
-import tabletMain from './tablet-main.png';
-<Figure src={tabletMain} alt="태블릿 메인 화면. 대시보드, CCTV, 프로필, AI 대화 카드가 한 화면에 배치되어 있다" caption="관람객이 체험 내내 손에 드는 태블릿 메인 화면" /> */}
-<MediaSlot kind="image" note="태블릿 메인 화면 캡처(갤럭시 탭, 가로). 대시보드·CCTV·프로필·AI 대화 카드가 모두 보이는 체험 중간 상태. 가능하면 카드 하나가 빛나는 순간을 잡은 것. 실제 관람객 정보나 CCTV 속 얼굴이 보이면 가리기" />
+<Figure src={tabletMain} alt="태블릿 메인 화면. 위쪽에 집·차·공원 진행 바, 가운데에 AI 인사말과 공간 일러스트, 기기 선택 카드, 프로필과 할 일 목록이 있고, 아래쪽에 CCTV 두 화면과 AI 대화 카드가 배치되어 있다" caption="관람객이 체험 내내 손에 드는 태블릿 메인 화면" />
 
 리뷰에서 규칙이 나오기까지, 그리고 그 전에 정보를 너무 많이 담으려다 겪은 일은 [1편](/blog/noticed-without-words/)에 썼습니다.
 
@@ -73,13 +70,19 @@ import tabletMain from './tablet-main.png';
 
 사전 설계에서는 태블릿 앱을 React Native로 계획했습니다. 실제로 전시장에 나간 것은 Next.js 웹앱 하나였고, 태블릿의 인트로·메인·하루 마무리 엔딩, 스탠바이미의 참여자 현황, TV의 집 이벤트 영상까지 다섯 화면이 모두 이 앱에서 나왔습니다. 앱으로 출시할 계획이 없었고 필요한 기능은 대부분 브라우저로 충분했으니, React Native의 런타임과 아키텍처 오버헤드를 떠안을 명분이 부족하다고 봤습니다.
 
-브라우저는 로봇과 카메라, 서버가 쓰는 메시지 버스(MQTT)에 직접 붙을 수 없어서, Next.js 서버가 메시지를 받아 검증한 뒤 실시간 스트림(SSE)으로 넘겨 주는 다리를 놓았습니다. 개발 도중에는 "태블릿 한 대에 체험 하나"라는 전제가 틀렸다는 걸 알고 서버 구조를 고치기도 했습니다. 이 판단들은 [2편](/blog/one-web-app-five-screens/)에 정리했습니다.
+<Figure src={tabletIntro} alt="태블릿 인트로 화면. '당신에 대해서 소개해 주세요' 제목 아래 자신을 표현하는 단어 칩과 원하는 AI 동반자의 모습을 고르는 칩이 놓여 있고, 일부 칩이 선택되어 있다" caption="태블릿 인트로. 관람객이 자신과 원하는 AI 동반자를 골라 페르소나를 만든다" />
+
+<Figure src={dioramaScreen} alt="디오라마 화면. 왼쪽에 AI의 상황·판단·결과 카드와 체험 중인 참여자 카드, 가운데에 도시 지도 위 참여자와 로봇 위치, 아래쪽에 스마트 허브 운영 현황·AI 활동 지표·드론 스테이션 패널이 있다" caption="디오라마 화면. 도시 지도 위에 참여자와 로봇의 위치, AI가 내린 판단이 함께 표시된다" />
+
+브라우저는 로봇과 카메라, 서버가 쓰는 메시지 버스(MQTT)에 직접 붙을 수 없어서, Next.js 서버가 메시지를 받아 검증한 뒤 실시간 스트림(SSE)으로 넘겨 주는 다리를 놓았습니다. 개발 도중에는 "태블릿 한 대에 체험 하나"라는 전제가 틀렸다는 걸 알고 서버 구조를 고치기도 했습니다. 이 판단들은 2편(준비 중)에서 정리합니다.
 
 ## 전시장이라는 현실
 
+<Video src={exhibitionBooth} clip caption="전시 부스 전경. 마트, 디오라마, 집 공간이 한 부스 안에 이어져 있다" />
+
 어려움은 화면 밖에서도 왔습니다. 로봇, 카메라 인식, 서버를 각기 다른 팀원이 동시에 만들고 있어서 주고받는 데이터 형식이 개발 내내 조금씩 달라졌고, 형식이 조금만 어긋나도 화면이 아무 표시 없이 멈췄습니다. 카메라 인식 결과는 1초 간격으로 켜졌다 꺼지기도 해서, 그대로 옮기면 화면과 효과음이 함께 떨렸습니다.
 
-그래서 받는 쪽을 너그럽게 만들고, 흔들리는 입력은 2.5초 동안 유지될 때만 반영하고, 관람객 눈에 띄지 않는 진단 패널을 숨겨 두어 현장에서 고칠 수 있게 했습니다. 자세한 이야기는 [3편](/blog/keeping-exhibition-screens-alive/)에 있습니다.
+그래서 받는 쪽을 너그럽게 만들고, 흔들리는 입력은 2.5초 동안 유지될 때만 반영하고, 관람객 눈에 띄지 않는 진단 패널을 숨겨 두어 현장에서 고칠 수 있게 했습니다. 자세한 이야기는 3편(준비 중)에서 다룹니다.
 
 ## 전시장에서 본 것
 
@@ -87,7 +90,7 @@ import tabletMain from './tablet-main.png';
 
 관람객이 태블릿 화면을 보며 "같은 AI가 나를 따라온다"고 느꼈는지는 솔직히 잘 모르겠습니다. 분명했던 것은, 사람들이 화면보다 스팟과 반려로봇처럼 몸을 가진 쪽을 훨씬 흥미롭게 지켜봤다는 점입니다.
 
-전시 기간에는 계획대로 되지 않은 일도 있었습니다. 디오라마 모형의 CCTV 영상 연결이 자주 말썽이라 원격으로 수시로 재시작했고, 팀 단위로 온 참여자의 위치를 놓치기도 했고, 플로깅에 쓸 소품이 치워져 급히 대용품을 찾기도 했습니다. 이 이야기는 [4편 회고](/blog/traveling-soul-retrospective/)에 모았습니다.
+전시 기간에는 계획대로 되지 않은 일도 있었습니다. 디오라마 모형의 CCTV 영상 연결이 자주 말썽이라 원격으로 수시로 재시작했고, 팀 단위로 온 참여자의 위치를 놓치기도 했고, 플로깅에 쓸 소품이 치워져 급히 대용품을 찾기도 했습니다. 이 이야기는 회고인 4편(준비 중)에 모을 예정입니다.
 
 {/* TODO: 체험 팀 수 등 숫자가 있으면 */}
 
@@ -99,11 +102,13 @@ import tabletMain from './tablet-main.png';
 
 ## 연재
 
+{/* TODO: 2~5편 발행 시 '(준비 중)'을 지우고 링크 복원 (2편 /blog/one-web-app-five-screens/, 3편 /blog/keeping-exhibition-screens-alive/, 4편 /blog/traveling-soul-retrospective/, 5편 /blog/building-with-claude-code/). 본문의 2·3·4편 언급도 함께 */}
+
 1. [AI가 '알아챘다'는 걸 말없이 보여 주기](/blog/noticed-without-words/): 시험 운영 리뷰에서 빛과 소리의 규칙이 나오기까지
-2. [React Native 대신 웹 하나로 만든 전시 화면 다섯 개](/blog/one-web-app-five-screens/): 앱 대신 웹을 고른 이유와, 그 뒤 고친 전제
-3. [전시장에서 화면이 멈추지 않게](/blog/keeping-exhibition-screens-alive/): 바뀌는 데이터 형식, 흔들리는 센서, 아무도 새로고침해 주지 않는 화면
-4. [피지컬 AI의 주인공은 몸이었다](/blog/traveling-soul-retrospective/): 참여 계기부터 전시장에서 본 것까지, 회고
-5. [Claude Code에게 부탁할 것과 강제할 것](/blog/building-with-claude-code/): 전시 화면 앱을 만들며 짠 AI 코딩 작업 방식
+2. React Native 대신 웹 하나로 만든 전시 화면 다섯 개 (준비 중): 앱 대신 웹을 고른 이유와, 그 뒤 고친 전제
+3. 전시장에서 화면이 멈추지 않게 (준비 중): 바뀌는 데이터 형식, 흔들리는 센서, 아무도 새로고침해 주지 않는 화면
+4. 피지컬 AI의 주인공은 몸이었다 (준비 중): 참여 계기부터 전시장에서 본 것까지, 회고
+5. Claude Code에게 부탁할 것과 강제할 것 (준비 중): 전시 화면 앱을 만들며 짠 AI 코딩 작업 방식
 
 ## 다시 만든다면
 
