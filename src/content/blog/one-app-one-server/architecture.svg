@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#52606d"/>
+    </marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#3b6fd8"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#9aa5b1"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+
+  <text x="40" y="52" font-size="22" font-weight="700" fill="#1f2933">전시에서 실제로 쓴 구조</text>
+
+  <!-- 다른 팀원 시스템 -->
+  <rect x="40" y="200" width="220" height="130" rx="12" fill="#f4f6fa" stroke="#c9d1dc" stroke-width="1.5"/>
+  <text x="150" y="250" font-size="17" font-weight="600" fill="#1f2933" text-anchor="middle">로봇 · 카메라 인식</text>
+  <text x="150" y="274" font-size="17" font-weight="600" fill="#1f2933" text-anchor="middle">오케스트레이션 서버</text>
+  <text x="150" y="304" font-size="14" fill="#7b8794" text-anchor="middle">(다른 팀원 시스템)</text>
+
+  <!-- 메시지 버스 -->
+  <rect x="320" y="200" width="170" height="130" rx="12" fill="#f4f6fa" stroke="#c9d1dc" stroke-width="1.5"/>
+  <text x="405" y="258" font-size="17" font-weight="600" fill="#1f2933" text-anchor="middle">메시지 버스</text>
+  <text x="405" y="284" font-size="15" fill="#52606d" text-anchor="middle">MQTT</text>
+
+  <line x1="262" y1="265" x2="318" y2="265" stroke="#52606d" stroke-width="2" marker-start="url(#a)" marker-end="url(#a)"/>
+
+  <!-- Next.js 서버 -->
+  <rect x="580" y="110" width="250" height="310" rx="14" fill="#e8f0ff" stroke="#3b6fd8" stroke-width="2"/>
+  <text x="705" y="152" font-size="19" font-weight="700" fill="#1f2933" text-anchor="middle">Next.js 서버</text>
+  <text x="705" y="176" font-size="13" fill="#52606d" text-anchor="middle">전시 화면 앱과 같은 프로젝트</text>
+  <line x1="605" y1="194" x2="805" y2="194" stroke="#b9cdf3"/>
+  <text x="610" y="228" font-size="15" fill="#1f2933">· 메시지 구독</text>
+  <text x="610" y="258" font-size="15" fill="#1f2933">· 형식 검증</text>
+  <text x="610" y="288" font-size="15" fill="#1f2933">· 최근 상태 기억</text>
+  <text x="610" y="318" font-size="15" fill="#1f2933">· 요청 검증 후 대신 발행</text>
+  <rect x="605" y="350" width="200" height="44" rx="8" fill="#ffffff" stroke="#3b6fd8" stroke-dasharray="4 3"/>
+  <text x="705" y="378" font-size="14" font-weight="600" fill="#3b6fd8" text-anchor="middle">버스 접속 보안키는 여기에만</text>
+
+  <!-- 버스 ↔ 서버 -->
+  <line x1="492" y1="245" x2="576" y2="245" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+  <text x="534" y="235" font-size="13" fill="#52606d" text-anchor="middle">구독</text>
+  <line x1="578" y1="290" x2="494" y2="290" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+  <text x="534" y="312" font-size="13" fill="#52606d" text-anchor="middle">발행</text>
+
+  <!-- 화면들 -->
+  <rect x="930" y="100" width="230" height="90" rx="12" fill="#ffffff" stroke="#c9d1dc" stroke-width="1.5"/>
+  <text x="1045" y="138" font-size="17" font-weight="600" fill="#1f2933" text-anchor="middle">태블릿</text>
+  <text x="1045" y="164" font-size="13" fill="#7b8794" text-anchor="middle">/ · /main · /outro</text>
+
+  <rect x="930" y="225" width="230" height="80" rx="12" fill="#ffffff" stroke="#c9d1dc" stroke-width="1.5"/>
+  <text x="1045" y="260" font-size="17" font-weight="600" fill="#1f2933" text-anchor="middle">스탠바이미</text>
+  <text x="1045" y="285" font-size="13" fill="#7b8794" text-anchor="middle">/diorama</text>
+
+  <rect x="930" y="340" width="230" height="80" rx="12" fill="#ffffff" stroke="#c9d1dc" stroke-width="1.5"/>
+  <text x="1045" y="375" font-size="17" font-weight="600" fill="#1f2933" text-anchor="middle">TV</text>
+  <text x="1045" y="400" font-size="13" fill="#7b8794" text-anchor="middle">/tv</text>
+
+  <!-- SSE -->
+  <line x1="832" y1="130" x2="926" y2="130" stroke="#3b6fd8" stroke-width="2" marker-end="url(#ab)"/>
+  <line x1="832" y1="265" x2="926" y2="265" stroke="#3b6fd8" stroke-width="2" marker-end="url(#ab)"/>
+  <line x1="832" y1="380" x2="926" y2="380" stroke="#3b6fd8" stroke-width="2" marker-end="url(#ab)"/>
+  <text x="879" y="120" font-size="13" fill="#3b6fd8" text-anchor="middle">SSE</text>
+  <text x="879" y="255" font-size="13" fill="#3b6fd8" text-anchor="middle">SSE</text>
+  <text x="879" y="370" font-size="13" fill="#3b6fd8" text-anchor="middle">SSE</text>
+  <!-- POST -->
+  <line x1="926" y1="168" x2="834" y2="168" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+  <text x="879" y="188" font-size="13" fill="#52606d" text-anchor="middle">POST</text>
+  <text x="1045" y="448" font-size="13" fill="#7b8794" text-anchor="middle">모두 같은 출처, 자기 서버하고만 통신</text>
+
+  <!-- 사전 설계 경로 -->
+  <line x1="40" y1="490" x2="1160" y2="490" stroke="#e4e7eb"/>
+  <text x="40" y="528" font-size="15" font-weight="700" fill="#7b8794">5월 사전 설계의 경로 (전시에서는 게이트웨이를 생략)</text>
+  <rect x="40" y="552" width="230" height="56" rx="10" fill="#ffffff" stroke="#9aa5b1" stroke-dasharray="6 4"/>
+  <text x="155" y="586" font-size="15" fill="#7b8794" text-anchor="middle">태블릿 앱 (React Native)</text>
+  <line x1="272" y1="580" x2="378" y2="580" stroke="#9aa5b1" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ag)"/>
+  <text x="325" y="570" font-size="13" fill="#9aa5b1" text-anchor="middle">WSS</text>
+  <rect x="382" y="552" width="210" height="56" rx="10" fill="#ffffff" stroke="#9aa5b1" stroke-dasharray="6 4"/>
+  <text x="487" y="586" font-size="15" fill="#7b8794" text-anchor="middle">태블릿 게이트웨이</text>
+  <line x1="594" y1="580" x2="690" y2="580" stroke="#9aa5b1" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ag)"/>
+  <rect x="694" y="552" width="170" height="56" rx="10" fill="#ffffff" stroke="#9aa5b1" stroke-dasharray="6 4"/>
+  <text x="779" y="586" font-size="15" fill="#7b8794" text-anchor="middle">메시지 버스</text>
+</svg>
