@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="1200" height="500" font-family="Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+  <!-- 시간축: 0초 = x 240, 1초 = 75px -->
+  <rect width="1200" height="500" fill="#ffffff"/>
+
+  <!-- 1초 눈금 -->
+  <g stroke="#eef1f4" stroke-width="1">
+    <line x1="240" y1="50" x2="240" y2="420"/><line x1="315" y1="50" x2="315" y2="420"/>
+    <line x1="390" y1="50" x2="390" y2="420"/><line x1="465" y1="50" x2="465" y2="420"/>
+    <line x1="540" y1="50" x2="540" y2="420"/><line x1="615" y1="50" x2="615" y2="420"/>
+    <line x1="690" y1="50" x2="690" y2="420"/><line x1="765" y1="50" x2="765" y2="420"/>
+    <line x1="840" y1="50" x2="840" y2="420"/><line x1="915" y1="50" x2="915" y2="420"/>
+    <line x1="990" y1="50" x2="990" y2="420"/><line x1="1065" y1="50" x2="1065" y2="420"/>
+    <line x1="1140" y1="50" x2="1140" y2="420"/>
+  </g>
+
+  <!-- 행 1: 인식 결과 -->
+  <text x="40" y="90" font-size="16" font-weight="700" fill="#1f2933">카메라 인식 결과</text>
+  <text x="40" y="114" font-size="13" fill="#7b8794">준비물 있음 / 없음</text>
+  <path d="M240 130 L240 80 L315 80 L315 130 L390 130 L390 80 L465 80 L465 130 L540 130 L540 80 L615 80 L615 130 L690 130 L690 80 L1140 80" fill="none" stroke="#52606d" stroke-width="2.5"/>
+  <text x="465" y="66" font-size="13" fill="#52606d" text-anchor="middle">1초 단위로 깜박임</text>
+
+  <!-- 행 2: 수정 전 -->
+  <text x="40" y="200" font-size="16" font-weight="700" fill="#1f2933">수정 전 화면</text>
+  <text x="40" y="224" font-size="13" fill="#7b8794">그대로 반영</text>
+  <path d="M240 240 L240 190 L315 190 L315 240 L390 240 L390 190 L465 190 L465 240 L540 240 L540 190 L615 190 L615 240 L690 240 L690 190 L1140 190" fill="none" stroke="#d64545" stroke-width="2.5"/>
+  <g fill="#d64545">
+    <circle cx="240" cy="172" r="9"/><circle cx="390" cy="172" r="9"/>
+    <circle cx="540" cy="172" r="9"/><circle cx="690" cy="172" r="9"/>
+  </g>
+  <text x="760" y="176" font-size="13" fill="#d64545">바뀔 때마다 효과음·알림</text>
+
+  <!-- 행 3: 수정 후 -->
+  <text x="40" y="320" font-size="16" font-weight="700" fill="#1f2933">수정 후 화면</text>
+  <text x="40" y="344" font-size="13" fill="#7b8794">2.5초 유지될 때만 반영</text>
+  <rect x="690" y="290" width="187.5" height="60" rx="6" fill="#e8f0ff"/>
+  <text x="783" y="378" font-size="13" fill="#3b6fd8" text-anchor="middle">2.5초 그대로</text>
+  <path d="M240 350 L877.5 350 L877.5 300 L1140 300" fill="none" stroke="#3b6fd8" stroke-width="2.5"/>
+  <circle cx="877.5" cy="282" r="9" fill="#3b6fd8"/>
+  <text x="895" y="286" font-size="13" fill="#3b6fd8">알림 한 번</text>
+
+  <!-- 축 -->
+  <line x1="240" y1="420" x2="1140" y2="420" stroke="#c9d1dc" stroke-width="1.5"/>
+  <g font-size="13" fill="#7b8794" text-anchor="middle">
+    <text x="240" y="444">0초</text><text x="390" y="444">2</text><text x="540" y="444">4</text>
+    <text x="690" y="444">6</text><text x="840" y="444">8</text><text x="990" y="444">10</text>
+    <text x="1140" y="444">12</text>
+  </g>
+  <text x="40" y="480" font-size="13" fill="#7b8794">타이밍은 설명을 위한 예시</text>
+</svg>

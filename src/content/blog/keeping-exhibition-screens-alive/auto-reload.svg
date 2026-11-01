@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="1200" height="380" font-family="Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+  <!-- 시간축: 0분 = x 120, 1분 = 32px (30분 = 1080) -->
+  <rect width="1200" height="380" fill="#ffffff"/>
+  <text x="40" y="52" font-size="20" font-weight="700" fill="#1f2933">스탠바이미 · TV가 새 버전을 받는 방법</text>
+
+  <!-- 1분마다 빌드 id 확인 -->
+  <text x="40" y="112" font-size="14" font-weight="700" fill="#1f2933">빌드 id</text>
+  <text x="40" y="132" font-size="13" fill="#7b8794">1분마다 확인</text>
+  <g fill="#c9d1dc">
+    <circle cx="152" cy="120" r="4"/><circle cx="184" cy="120" r="4"/><circle cx="216" cy="120" r="4"/>
+    <circle cx="248" cy="120" r="4"/><circle cx="280" cy="120" r="4"/><circle cx="312" cy="120" r="4"/>
+    <circle cx="344" cy="120" r="4"/><circle cx="408" cy="120" r="4"/>
+    <circle cx="440" cy="120" r="4"/><circle cx="472" cy="120" r="4"/><circle cx="504" cy="120" r="4"/>
+    <circle cx="536" cy="120" r="4"/><circle cx="568" cy="120" r="4"/><circle cx="600" cy="120" r="4"/>
+    <circle cx="632" cy="120" r="4"/><circle cx="664" cy="120" r="4"/><circle cx="696" cy="120" r="4"/>
+    <circle cx="728" cy="120" r="4"/><circle cx="760" cy="120" r="4"/><circle cx="792" cy="120" r="4"/>
+    <circle cx="824" cy="120" r="4"/><circle cx="856" cy="120" r="4"/><circle cx="888" cy="120" r="4"/>
+    <circle cx="920" cy="120" r="4"/><circle cx="952" cy="120" r="4"/><circle cx="984" cy="120" r="4"/>
+    <circle cx="1016" cy="120" r="4"/><circle cx="1048" cy="120" r="4"/><circle cx="1080" cy="120" r="4"/>
+  </g>
+  <!-- 배포 후 첫 확인에서 감지 -->
+  <line x1="355" y1="80" x2="355" y2="260" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="355" y="74" font-size="13" fill="#52606d" text-anchor="middle">서버에 새 버전 배포</text>
+  <circle cx="376" cy="120" r="8" fill="#3b6fd8"/>
+  <text x="392" y="160" font-size="13" fill="#3b6fd8">바뀐 빌드 id 발견 → 다시 불러옴</text>
+
+  <!-- 15분마다 새로고침 -->
+  <text x="40" y="222" font-size="14" font-weight="700" fill="#1f2933">새로고침</text>
+  <text x="40" y="242" font-size="13" fill="#7b8794">15분마다</text>
+  <rect x="592" y="214" width="16" height="16" rx="3" fill="#52606d"/>
+  <rect x="1072" y="214" width="16" height="16" rx="3" fill="#52606d"/>
+  <text x="600" y="258" font-size="13" fill="#52606d" text-anchor="middle">정기 새로고침</text>
+  <text x="1080" y="258" font-size="13" fill="#52606d" text-anchor="middle">정기 새로고침</text>
+
+  <!-- 축 -->
+  <line x1="120" y1="300" x2="1080" y2="300" stroke="#c9d1dc" stroke-width="1.5"/>
+  <g font-size="13" fill="#7b8794" text-anchor="middle">
+    <text x="120" y="324">0분</text><text x="440" y="324">10</text>
+    <text x="600" y="324">15</text><text x="760" y="324">20</text><text x="1080" y="324">30</text>
+  </g>
+  <text x="40" y="360" font-size="13" fill="#7b8794">배포 시점은 설명을 위한 예시</text>
+</svg>

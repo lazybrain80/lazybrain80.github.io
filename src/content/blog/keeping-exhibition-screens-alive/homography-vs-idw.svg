@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" font-family="Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#d64545"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <line x1="600" y1="40" x2="600" y2="520" stroke="#e4e7eb" stroke-width="1.5"/>
+
+  <!-- 왼쪽: 호모그래피 -->
+  <text x="40" y="60" font-size="20" font-weight="700" fill="#1f2933">호모그래피</text>
+  <text x="40" y="88" font-size="15" fill="#52606d">바닥 네 점과 지도 네 점을 원근 변환으로 짝지음</text>
+
+  <!-- 지도 일러스트 (기울어진 판) -->
+  <path d="M300 140 L520 250 L300 360 L80 250 Z" fill="#f5f7fa" stroke="#c9d1dc" stroke-width="1.5"/>
+  <text x="300" y="400" font-size="13" fill="#7b8794" text-anchor="middle">지도 일러스트</text>
+
+  <!-- 꼬인 사각형 (나비넥타이) -->
+  <path d="M200 200 L400 300 L400 200 L200 300 Z" fill="#d64545" fill-opacity="0.12" stroke="#d64545" stroke-width="2"/>
+  <g fill="#ffffff" stroke="#d64545" stroke-width="2">
+    <circle cx="200" cy="200" r="6"/><circle cx="400" cy="300" r="6"/>
+    <circle cx="400" cy="200" r="6"/><circle cx="200" cy="300" r="6"/>
+  </g>
+  <text x="300" y="186" font-size="13" fill="#d64545" text-anchor="middle">사각형이 꼬임</text>
+
+  <!-- 튀어 나간 점 -->
+  <circle cx="300" cy="250" r="7" fill="none" stroke="#7b8794" stroke-width="2" stroke-dasharray="3 3"/>
+  <path d="M308 256 Q450 330 528 418" fill="none" stroke="#d64545" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+  <circle cx="536" cy="430" r="9" fill="#d64545"/>
+  <text x="520" y="468" font-size="13" fill="#d64545" text-anchor="end">점이 지도 밖으로</text>
+
+  <!-- 오른쪽: IDW -->
+  <text x="640" y="60" font-size="20" font-weight="700" fill="#1f2933">구역 대응점 + 역거리 가중(IDW)</text>
+  <text x="640" y="88" font-size="15" fill="#52606d">가까운 대응점일수록 더 큰 가중치</text>
+
+  <path d="M900 140 L1120 250 L900 360 L680 250 Z" fill="#f5f7fa" stroke="#c9d1dc" stroke-width="1.5"/>
+  <text x="900" y="400" font-size="13" fill="#7b8794" text-anchor="middle">지도 일러스트</text>
+
+  <!-- 대응점 네 개와 가중치 선 (두께 = 가중치) -->
+  <g stroke="#3b6fd8" stroke-linecap="round">
+    <line x1="850" y1="230" x2="800" y2="205" stroke-width="7"/>
+    <line x1="850" y1="230" x2="960" y2="215" stroke-width="3.5"/>
+    <line x1="850" y1="230" x2="830" y2="300" stroke-width="4.5"/>
+    <line x1="850" y1="230" x2="1010" y2="285" stroke-width="1.8"/>
+  </g>
+  <g fill="#ffffff" stroke="#3b6fd8" stroke-width="2.5">
+    <rect x="792" y="197" width="16" height="16" rx="3"/>
+    <rect x="952" y="207" width="16" height="16" rx="3"/>
+    <rect x="822" y="292" width="16" height="16" rx="3"/>
+    <rect x="1002" y="277" width="16" height="16" rx="3"/>
+  </g>
+  <circle cx="850" cy="230" r="9" fill="#1f2933"/>
+  <text x="690" y="460" font-size="13" fill="#52606d">□ 구역 대응점 (현장에서 잰 바닥 좌표 ↔ 지도 위치)</text>
+  <text x="690" y="484" font-size="13" fill="#52606d">● 참여자 위치, 선이 굵을수록 큰 가중치</text>
+</svg>
