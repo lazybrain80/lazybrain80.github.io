@@ -14,10 +14,12 @@ export async function getPosts() {
 
 // 프로젝트에 연결된 글을 읽는 순서대로: 먼저 쓴 글이 위, 같은 날이면 제목 순('1편', '2편'…)
 // 연재 목록용이라 draft도 포함한다. draft는 페이지가 빌드되지 않으므로 '준비 중'으로만 보이고 링크를 걸지 않는다
+// draft의 pubDate는 초안을 만든 날짜라 공개된 글보다 앞설 수 있으므로, draft는 공개된 글 뒤로 보낸다
 export async function getProjectPosts(projectId: string) {
 	return (await getCollection('blog', (post) => post.data.project?.id === projectId))
 		.sort(
 			(a, b) =>
+				Number(a.data.draft) - Number(b.data.draft) ||
 				a.data.pubDate.valueOf() - b.data.pubDate.valueOf() ||
 				a.data.title.localeCompare(b.data.title, 'ko', { numeric: true }),
 		);
