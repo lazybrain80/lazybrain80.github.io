@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" font-family="Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#3b6fd8"/>
+    </marker>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#52606d"/>
+    </marker>
+    <radialGradient id="soul" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#3b6fd8" stop-opacity="0.9"/>
+      <stop offset="0.55" stop-color="#3b6fd8" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#3b6fd8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+
+  <!-- 위: 몸을 바꿔 가는 AI 하나 -->
+  <text x="40" y="60" font-size="20" font-weight="700" fill="#1f2933">체험하는 동안: AI 하나가 몸을 바꿔 간다</text>
+  <text x="40" y="88" font-size="15" fill="#52606d">기기가 바뀌어도 기억과 말투, 감정을 그대로 이어받는다</text>
+
+  <!-- 차량 -->
+  <rect x="80" y="150" width="200" height="140" rx="14" fill="#ffffff" stroke="#c9d1dc" stroke-width="1.5"/>
+  <path d="M118 236 L132 206 Q136 198 146 198 L214 198 Q224 198 228 206 L242 236 Z" fill="#f5f7fa" stroke="#52606d" stroke-width="2" stroke-linejoin="round"/>
+  <rect x="108" y="234" width="144" height="26" rx="8" fill="#f5f7fa" stroke="#52606d" stroke-width="2"/>
+  <circle cx="140" cy="262" r="10" fill="#ffffff" stroke="#52606d" stroke-width="2"/>
+  <circle cx="220" cy="262" r="10" fill="#ffffff" stroke="#52606d" stroke-width="2"/>
+  <text x="180" y="318" font-size="16" font-weight="700" fill="#1f2933" text-anchor="middle">차량</text>
+
+  <!-- 로봇 -->
+  <rect x="460" y="150" width="200" height="140" rx="14" fill="#ffffff" stroke="#c9d1dc" stroke-width="1.5"/>
+  <rect x="505" y="205" width="100" height="30" rx="10" fill="#f5f7fa" stroke="#52606d" stroke-width="2"/>
+  <rect x="600" y="196" width="28" height="22" rx="7" fill="#f5f7fa" stroke="#52606d" stroke-width="2"/>
+  <path d="M518 235 L510 252 L518 268 M548 235 L540 252 L548 268 M572 235 L580 252 L572 268 M598 235 L606 252 L598 268" fill="none" stroke="#52606d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="560" y="318" font-size="16" font-weight="700" fill="#1f2933" text-anchor="middle">로봇</text>
+
+  <!-- 집 -->
+  <rect x="840" y="150" width="200" height="140" rx="14" fill="#ffffff" stroke="#c9d1dc" stroke-width="1.5"/>
+  <path d="M890 230 L940 194 L990 230" fill="none" stroke="#52606d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect x="902" y="226" width="76" height="48" rx="4" fill="#f5f7fa" stroke="#52606d" stroke-width="2"/>
+  <rect x="930" y="248" width="20" height="26" rx="3" fill="#ffffff" stroke="#52606d" stroke-width="2"/>
+  <text x="940" y="318" font-size="16" font-weight="700" fill="#1f2933" text-anchor="middle">집</text>
+
+  <!-- 영혼 표시 -->
+  <circle cx="180" cy="178" r="20" fill="url(#soul)"/>
+  <circle cx="560" cy="178" r="20" fill="url(#soul)"/>
+  <circle cx="940" cy="178" r="20" fill="url(#soul)"/>
+  <circle cx="180" cy="178" r="6" fill="#3b6fd8"/>
+  <circle cx="560" cy="178" r="6" fill="#3b6fd8"/>
+  <circle cx="940" cy="178" r="6" fill="#3b6fd8"/>
+
+  <line x1="290" y1="220" x2="452" y2="220" stroke="#3b6fd8" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round" marker-end="url(#ab)"/>
+  <text x="371" y="206" font-size="13" fill="#3b6fd8" text-anchor="middle">기억·말투 인계</text>
+  <line x1="670" y1="220" x2="832" y2="220" stroke="#3b6fd8" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round" marker-end="url(#ab)"/>
+  <text x="751" y="206" font-size="13" fill="#3b6fd8" text-anchor="middle">기억·말투 인계</text>
+
+  <line x1="40" y1="356" x2="1160" y2="356" stroke="#e4e7eb" stroke-width="1.5"/>
+
+  <!-- 아래: 체험이 끝난 뒤 묻는 질문 -->
+  <text x="40" y="398" font-size="20" font-weight="700" fill="#1f2933">체험이 끝난 뒤: 한 가지를 묻는다</text>
+
+  <rect x="80" y="430" width="380" height="76" rx="18" fill="#f5f7fa" stroke="#c9d1dc" stroke-width="1.5"/>
+  <path d="M130 506 L118 532 L156 506 Z" fill="#f5f7fa" stroke="#c9d1dc" stroke-width="1.5" stroke-linejoin="round"/>
+  <rect x="126" y="503" width="34" height="5" fill="#f5f7fa"/>
+  <text x="270" y="476" font-size="20" font-weight="700" fill="#1f2933" text-anchor="middle">"AI가 몇 명이었던 것 같나요?"</text>
+
+  <line x1="470" y1="468" x2="566" y2="468" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="580" y="420" width="260" height="96" rx="14" fill="#e8f0ff" stroke="#3b6fd8" stroke-width="2"/>
+  <text x="710" y="460" font-size="22" font-weight="700" fill="#3b6fd8" text-anchor="middle">"한 명"</text>
+  <text x="710" y="490" font-size="15" fill="#1f2933" text-anchor="middle">성공: 같은 AI로 느꼈다</text>
+
+  <rect x="880" y="420" width="260" height="96" rx="14" fill="#ffffff" stroke="#c9d1dc" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="1010" y="460" font-size="22" font-weight="700" fill="#7b8794" text-anchor="middle">"여러 명"</text>
+  <text x="1010" y="490" font-size="15" fill="#7b8794" text-anchor="middle">기기마다 다른 AI로 느꼈다</text>
+
+  <text x="40" y="572" font-size="13" fill="#7b8794">킥오프 피칭에 적은 성공 기준을 설명하기 위해 다시 그린 그림</text>
+</svg>
